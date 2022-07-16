@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.router.navigate(['/signin']);
+    // this.router.navigate(['/auth']);
     return true;
   }
 }

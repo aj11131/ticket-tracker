@@ -7,7 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AuthModule } from './auth/auth.module';
-import { TicketsModule } from './tickets/tickets.module';
+import { TicketModule } from './ticket/ticket.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MaterialModule,
     AuthModule,
-    TicketsModule,
+    TicketModule,
     HttpClientModule,
   ],
   providers: [],

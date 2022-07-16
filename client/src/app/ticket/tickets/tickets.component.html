@@ -1,0 +1,6 @@
+
+<mat-card class="filters-card"><app-ticket-filter></app-ticket-filter></mat-card>
+
+<div *ngFor="let ticket of filteredTickets$ | async">
+  <app-ticket [ticket]="ticket"></app-ticket>
+</div>

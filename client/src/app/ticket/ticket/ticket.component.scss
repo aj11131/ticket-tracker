@@ -1,0 +1,53 @@
+.ticket-card {
+  margin-bottom: 1rem;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &__text {
+    margin: 0;
+    padding: 1rem;
+
+    &--light {
+      opacity: 0.7;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+  
+}
+
+
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px var(--color-grey-medium) solid;
+
+
+  &__id {
+    flex: 1;
+    border-right: 1px var(--color-grey-medium) solid;
+  }
+
+  &__title {
+    flex: 4;
+    border-right: 1px var(--color-grey-medium) solid;
+  }
+
+  &__status {
+    flex: 1;
+  }
+}
+
+.second-row {
+  margin-top: 2rem;
+
+  &__column {
+    display: flex;
+  }
+
+}

@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AuthModule } from './auth/auth.module';
 import { TicketsModule } from './tickets/tickets.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -18,6 +19,7 @@ import { TicketsModule } from './tickets/tickets.module';
     MaterialModule,
     AuthModule,
     TicketsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

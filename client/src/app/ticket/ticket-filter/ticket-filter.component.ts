@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { TicketFilterService } from 'src/app/core/ticket-filter.service';
+import {
+  TicketPriorityEnum,
+  TicketStatusEnum,
+} from '../../../../../common/src/types';
 
 @Component({
   selector: 'app-ticket-filter',
@@ -8,12 +12,17 @@ import { TicketFilterService } from 'src/app/core/ticket-filter.service';
   styleUrls: ['./ticket-filter.component.scss'],
 })
 export class TicketFilterComponent implements OnInit {
+  TicketStatusEnum = TicketStatusEnum;
+  TicketPriorityEnum = TicketPriorityEnum;
+
   ticketFilterForm = this.fb.group({
-    text: [''],
+    text: [null],
     priority: [null],
     assigned: [null],
     status: [null],
     tags: [null],
+    createdAfter: [null],
+    createdBefore: [null],
   });
 
   constructor(
@@ -23,7 +32,12 @@ export class TicketFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.ticketFilterForm.valueChanges.subscribe((value) => {
+      console.log(value);
       this.ticketFilterService.updateTicketFilter(value);
     });
+  }
+
+  onClear() {
+    this.ticketFilterForm.reset();
   }
 }

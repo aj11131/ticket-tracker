@@ -1,4 +1,4 @@
-<mat-card class="ticket-card">
+<mat-card class="ticket-card" (click)="onClick()">
   <div class="top-row">
     <div class="top-row__id">
       <span  style="font-weight: bold;"><h3 class="ticket-card__text">{{ticket.id}}</h3> </span>
@@ -9,7 +9,15 @@
   <div class="second-row">
     <div class="second-row__column">
       <p class="ticket-card__text ticket-card__text--light">Assigned To:</p>
-      <p class="ticket-card__text">Steve Holt</p>
+      <p class="ticket-card__text">{{ticket.assigned.name}}</p>
+    </div>
+    <div class="second-row__column">
+      <p class="ticket-card__text ticket-card__text--light">Priority:</p>
+      <p class="ticket-card__text">{{ticket.priority}}</p>
+    </div>
+    <div class="second-row__column">
+      <p class="ticket-card__text ticket-card__text--light">Created:</p>
+      <p class="ticket-card__text">{{ticket.creationDate | date}}</p>
     </div>
   </div>
 </mat-card>

@@ -1,9 +1,38 @@
-<form [formGroup]="ticketFilterForm">
-  <p>
-    <mat-form-field appearance="standard">
-      <mat-label>Filter</mat-label>
-      <input matInput placeholder="Search tickets" formControlName="text">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </p>
-</form>
+<form [formGroup]="ticketFilterForm" class="filter-form">
+
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Search tickets" formControlName="text">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status" multiple>
+      <mat-option *ngFor="let status of TicketStatusEnum | keyvalue" [value]="status.value">{{status.value}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Priority</mat-label>
+    <mat-select formControlName="priority" multiple>
+      <mat-option *ngFor="let priority of TicketPriorityEnum | keyvalue" [value]="priority.value">{{priority.value}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Created After</mat-label>
+    <input formControlName="createdAfter" matInput [matDatepicker]="startPicker">
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Created Before</mat-label>
+    <input formControlName="createdBefore" matInput [matDatepicker]="endPicker">
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+
+  <button style="align-self: center;" mat-raised-button (click)="onClear()">Clear</button>
+</form> 

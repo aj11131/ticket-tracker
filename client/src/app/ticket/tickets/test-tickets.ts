@@ -1,50 +1,60 @@
 import {
   Ticket,
-  TicketPriority,
-  TicketStatus,
+  TicketPriorityEnum,
+  TicketStatusEnum,
 } from '../../../../../common/src/types';
+
+const date1 = new Date();
+const date2 = new Date();
+const date3 = new Date();
+
+date2.setDate(date2.getDate() + 5);
+date3.setMonth(date3.getMonth() - 2);
 
 export const tickets: Ticket[] = [
   {
     id: '1234',
     title: 'Low priority ticket',
     description: 'I am a ticket',
-    status: TicketStatus.ACTIVE,
+    status: TicketStatusEnum.ACTIVE,
     creationDate: new Date(),
     closedDate: null,
     tags: ['server', ''],
-    priority: TicketPriority.LOW,
+    priority: TicketPriorityEnum.LOW,
     assigned: {
-      id: '2',
-      username: 'test123',
+      id: '891234790812',
+      email: 'test@test.com',
+      name: 'Bob Smith',
     },
   },
   {
     id: '4567',
     title: 'Medium priority ticket',
     description: 'I am a ticket',
-    status: TicketStatus.ACTIVE,
-    creationDate: new Date(),
+    status: TicketStatusEnum.ACTIVE,
+    creationDate: date2,
     closedDate: null,
     tags: ['server', ''],
-    priority: TicketPriority.MEDIUM,
+    priority: TicketPriorityEnum.MEDIUM,
     assigned: {
       id: '2',
-      username: 'test123',
+      email: 'test@test.com',
+      name: 'Bob Smith',
     },
   },
   {
     id: '7890',
     title: 'High priority ticket',
     description: 'I am a ticket',
-    status: TicketStatus.CLOSED,
-    creationDate: new Date(),
+    status: TicketStatusEnum.CLOSED,
+    creationDate: date3,
     closedDate: null,
     tags: ['server', ''],
-    priority: TicketPriority.HIGH,
+    priority: TicketPriorityEnum.HIGH,
     assigned: {
       id: '2',
-      username: 'test123',
+      email: 'test@test.com',
+      name: 'Bob Smith',
     },
   },
 ];

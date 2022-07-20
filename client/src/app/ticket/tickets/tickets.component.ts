@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map, tap, withLatestFrom } from 'rxjs';
 import { TicketFilterService } from 'src/app/core/ticket-filter.service';
-import { TicketService } from 'src/app/core/tickets.service';
+import { TicketService } from 'src/app/core/ticket.service';
 
 @Component({
   selector: 'app-tickets',
@@ -9,7 +9,7 @@ import { TicketService } from 'src/app/core/tickets.service';
   styleUrls: ['./tickets.component.scss'],
 })
 export class TicketsComponent implements OnInit {
-  tickets$ = this.ticketService.getTickets();
+  tickets$ = this.ticketService.tickets;
 
   ticketFilter$ = this.ticketFilterService.ticketFilter$;
 

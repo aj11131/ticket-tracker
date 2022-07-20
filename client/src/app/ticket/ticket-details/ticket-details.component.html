@@ -1,0 +1,50 @@
+<div *ngIf="ticket; else notFound">
+  <mat-card>
+    <form [formGroup]="ticketForm">
+      <mat-card-subtitle>{{ticket.id}}</mat-card-subtitle>
+      <mat-card-title>
+        <mat-form-field style="display: block;" appearance="standard">
+          <input matInput placeholder="Title" formControlName="title">
+        </mat-form-field>
+      </mat-card-title>
+      <mat-card-content>
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Assigned To</mat-label>
+            <mat-select formControlName="assigned" [compareWith]="compareUsers">
+              <mat-option *ngFor="let user of users$ | async" [value]="user">{{user.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option *ngFor="let status of TicketStatusEnum | keyvalue" [value]="status.value">{{status.value | titlecase}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <mat-form-field appearance="standard">
+            <mat-label>Priority</mat-label>
+            <mat-select formControlName="priority">
+              <mat-option *ngFor="let priority of TicketPriorityEnum | keyvalue" [value]="priority.value">{{priority.value | titlecase}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-form-field style="display: block;" appearance="standard">
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="button" [routerLink]="'/tickets'">Cancel</button>
+        <button mat-raised-button color="primary">Save</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
+
+<ng-template #notFound>
+  <div>
+    Ticket not found!
+  </div>
+</ng-template>

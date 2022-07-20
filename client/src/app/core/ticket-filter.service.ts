@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Ticket } from '../../../../common/src/types';
+import { Ticket, TicketStatusEnum } from '../../../../common/src/types';
 
 export interface TicketFilter {
   text: string;
-  priority: number | null;
+  priority: string[] | null;
   assigned: string | null;
-  status: string | null;
+  status: string[] | null;
   tags: string[] | null;
+  createdAfter: Date | null;
+  createdBefore: Date | null;
 }
 
 @Injectable({
@@ -19,20 +21,52 @@ export class TicketFilterService {
 
   constructor() {}
 
-  filterTickets(data: [TicketFilter | null, Ticket[]]) {
+  filterTickets = (data: [TicketFilter | null, Ticket[]]) => {
     const [filterValue, tickets] = data;
     if (filterValue === null) return tickets;
-
-    const filteredTickets = tickets.filter((ticket) => {
-      return (
-        ticket.id.includes(filterValue.text) ||
-        ticket.title.includes(filterValue.text) ||
-        ticket.description.includes(filterValue.text)
-      );
+    let filteredTickets = tickets.filter((ticket) => {
+      const valid =
+        this.filterByText(filterValue, ticket) &&
+        this.filterByStatus(filterValue, ticket) &&
+        this.filterByPriority(filterValue, ticket) &&
+        this.filterByCreationDate(filterValue, ticket);
+      return valid;
     });
 
     return filteredTickets;
-  }
+  };
+
+  filterByText = (filterValue: TicketFilter, ticket: Ticket): boolean => {
+    const textFilterValue = filterValue.text?.toLowerCase() || '';
+    return (
+      ticket.id.toLowerCase().includes(textFilterValue) ||
+      ticket.title.toLowerCase().includes(textFilterValue) ||
+      ticket.description.toLowerCase().includes(textFilterValue)
+    );
+  };
+
+  filterByStatus = (filterValue: TicketFilter, ticket: Ticket): boolean => {
+    const selectedStatus = filterValue.status || [];
+    if (selectedStatus?.length === 0) return true;
+    return selectedStatus?.includes(ticket.status) || false;
+  };
+
+  filterByPriority = (filterValue: TicketFilter, ticket: Ticket): boolean => {
+    const selectedPriority = filterValue.priority || [];
+    if (selectedPriority?.length === 0) return true;
+    return selectedPriority?.includes(ticket.priority) || false;
+  };
+
+  filterByCreationDate = (
+    filterValue: TicketFilter,
+    ticket: Ticket
+  ): boolean => {
+    const createdAfter = filterValue.createdAfter?.getTime() || -Infinity;
+    const createdBefore = filterValue.createdBefore?.getTime() || Infinity;
+    if (!createdAfter && !createdBefore) return true;
+    const created = ticket.creationDate.getTime();
+    return created >= createdAfter && created <= createdBefore;
+  };
 
   updateTicketFilter(value: any) {
     this.ticketFilter.next(value);

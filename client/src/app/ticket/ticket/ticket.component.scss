@@ -27,24 +27,26 @@
   align-items: center;
   border-bottom: 1px var(--color-grey-medium) solid;
 
-
   &__id {
     flex: 1;
     border-right: 1px var(--color-grey-medium) solid;
   }
 
   &__title {
-    flex: 4;
+    flex: 10;
     border-right: 1px var(--color-grey-medium) solid;
   }
 
   &__status {
-    flex: 1;
+    flex: 2;
   }
 }
 
 .second-row {
-  margin-top: 2rem;
+  padding: 0.5rem 0 0.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
   &__column {
     display: flex;

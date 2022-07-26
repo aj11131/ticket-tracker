@@ -3,7 +3,7 @@ import {
   Ticket,
   TicketPriorityEnum,
   TicketStatusEnum,
-} from '../../../../common/src/types';
+} from '@tickets11131/ticket-tracker-common';
 
 import { TicketFilterService } from './ticket-filter.service';
 

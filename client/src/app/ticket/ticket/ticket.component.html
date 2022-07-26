@@ -1,11 +1,24 @@
 <mat-card class="ticket-card" (click)="onClick()">
   <div class="top-row">
     <div class="top-row__id">
-      <span  style="font-weight: bold;"><h3 class="ticket-card__text">{{ticket.id}}</h3> </span>
+      <span style="font-weight: bold;">
+        <h3 class="ticket-card__text ticket-card__text--id">{{ticket.id}}</h3>
+      </span>
+      <span>
+        <p [ngClass]="getStatusClass(ticket.status)" class="top-row__status">{{ticket.status | titlecase}}</p>
+      </span>
     </div>
-    <span class="top-row__title"><h3 class="ticket-card__text">{{ticket.title}}</h3></span>
-    <span class="top-row__status"><h3 class="ticket-card__text">{{ticket.status}}</h3></span>
+    <div class="top-row__title">
+      <span>
+        <h2 class="ticket-card__text--title">{{ticket.title}}</h2>
+      </span>
+      <span>
+        <p class="ticket-card__text--description">{{ticket.description}}</p>
+      </span>
+    </div>
   </div>
+
+
   <div class="second-row">
     <div class="second-row__column">
       <p class="ticket-card__text ticket-card__text--light">Assigned To:</p>
@@ -13,7 +26,10 @@
     </div>
     <div class="second-row__column">
       <p class="ticket-card__text ticket-card__text--light">Priority:</p>
-      <p class="ticket-card__text">{{ticket.priority}}</p>
+      <div class="second-row__priority">
+        <p class="ticket-card__text">{{ticket.priority | titlecase}}</p>
+        <mat-icon style="color: red; transform: scale(.8);" *ngIf="ticket.priority === TicketPriorityEnum.HIGH">priority_high</mat-icon>
+      </div>
     </div>
     <div class="second-row__column">
       <p class="ticket-card__text ticket-card__text--light">Created:</p>

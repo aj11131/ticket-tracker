@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Ticket, TicketStatusEnum } from '../../../../common/src/types';
+import { Ticket, TicketStatusEnum } from '@tickets11131/ticket-tracker-common';
 
 export interface TicketFilter {
   text: string;

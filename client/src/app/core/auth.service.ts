@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,13 +9,23 @@ import { of } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  signup(credentials: { username: string; password: string }) {
-    const endpoint = 'http://localhost:3000/signup';
+  currentUser() {
+    const endpoint = environment.apiEndpoint + 'users/currentuser';
+
+    return this.http.get<{ currentUser: string | null }>(endpoint, {
+      withCredentials: true,
+    });
+  }
+
+  signup(credentials: { email: string; password: string }) {
+    const endpoint = environment.apiEndpoint + 'users/signup';
 
     return this.http.post(endpoint, credentials);
   }
 
-  signin(credentials: { username: string; password: string }) {
-    return of(null);
+  signin(credentials: { email: string; password: string }) {
+    const endpoint = environment.apiEndpoint + 'users/signin';
+
+    return this.http.post(endpoint, credentials);
   }
 }

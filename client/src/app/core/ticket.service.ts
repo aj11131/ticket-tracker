@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, of, shareReplay } from 'rxjs';
-import { Ticket } from '../../../../common/src/types';
+import { Ticket } from '@tickets11131/ticket-tracker-common';
 import { tickets } from '../ticket/tickets/test-tickets';
 
 @Injectable({

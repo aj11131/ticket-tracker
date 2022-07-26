@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, shareReplay } from 'rxjs';
-import { User } from '../../../../common/src/types';
+import { User } from '@tickets11131/ticket-tracker-common';
 
 @Injectable({
   providedIn: 'root',

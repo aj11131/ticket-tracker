@@ -4,7 +4,7 @@ import { TicketFilterService } from 'src/app/core/ticket-filter.service';
 import {
   TicketPriorityEnum,
   TicketStatusEnum,
-} from '../../../../../common/src/types';
+} from '@tickets11131/ticket-tracker-common';
 
 @Component({
   selector: 'app-ticket-filter',

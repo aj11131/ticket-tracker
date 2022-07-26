@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Ticket } from '../../../../../common/src/types';
+import {
+  Ticket,
+  TicketStatusEnum,
+  TicketPriorityEnum,
+} from '@tickets11131/ticket-tracker-common';
 
 @Component({
   selector: 'app-ticket',
@@ -9,6 +13,7 @@ import { Ticket } from '../../../../../common/src/types';
 })
 export class TicketComponent implements OnInit {
   @Input() ticket!: Ticket;
+  TicketPriorityEnum = TicketPriorityEnum;
 
   constructor(private router: Router) {}
 
@@ -18,5 +23,16 @@ export class TicketComponent implements OnInit {
     console.log(`/${this.ticket.id}`);
     // this.router.navigate([`${this.ticket.id}`]);
     this.router.navigate(['/tickets', this.ticket.id]);
+  }
+
+  getStatusClass(status: TicketStatusEnum) {
+    switch (status) {
+      case TicketStatusEnum.NEW:
+        return 'top-row__status--new';
+      case TicketStatusEnum.ACTIVE:
+        return 'top-row__status--active';
+      case TicketStatusEnum.CLOSED:
+        return 'top-row__status--closed';
+    }
   }
 }

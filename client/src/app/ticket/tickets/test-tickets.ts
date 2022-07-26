@@ -2,7 +2,7 @@ import {
   Ticket,
   TicketPriorityEnum,
   TicketStatusEnum,
-} from '../../../../../common/src/types';
+} from '@tickets11131/ticket-tracker-common';
 
 const date1 = new Date();
 const date2 = new Date();
@@ -16,7 +16,7 @@ export const tickets: Ticket[] = [
     id: '1234',
     title: 'Low priority ticket',
     description: 'I am a ticket',
-    status: TicketStatusEnum.ACTIVE,
+    status: TicketStatusEnum.NEW,
     creationDate: new Date(),
     closedDate: null,
     tags: ['server', ''],

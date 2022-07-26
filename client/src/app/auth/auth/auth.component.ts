@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { take } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError, EMPTY, take } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
 
 enum AuthMode {
@@ -15,6 +16,7 @@ enum AuthMode {
 })
 export class AuthComponent implements OnInit {
   hide = true;
+  errors: { message: string }[] = [];
   currentAuthMode = AuthMode.SIGNIN;
 
   get AuthModeEnum() {
@@ -26,11 +28,15 @@ export class AuthComponent implements OnInit {
   }
 
   signinForm = this.fb.group({
-    username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -40,14 +46,27 @@ export class AuthComponent implements OnInit {
 
   onSubmit() {
     const credentials = this.signinForm.value as {
-      username: string;
+      email: string;
       password: string;
     };
 
+    let auth$;
     if (this.currentAuthMode === this.AuthModeEnum.SIGNUP) {
-      this.authService.signup(credentials).pipe(take(1)).subscribe();
+      auth$ = this.authService.signup(credentials);
     } else {
-      this.authService.signin(credentials).pipe(take(1)).subscribe();
+      auth$ = this.authService.signin(credentials);
     }
+
+    auth$
+      .pipe(
+        take(1),
+        catchError((error) => {
+          console.log(error);
+          return EMPTY;
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['/tickets']);
+      });
   }
 }

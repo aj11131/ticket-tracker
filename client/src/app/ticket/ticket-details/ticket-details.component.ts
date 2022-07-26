@@ -9,7 +9,7 @@ import {
   TicketPriorityEnum,
   TicketStatusEnum,
   User,
-} from '../../../../../common/src/types';
+} from '@tickets11131/ticket-tracker-common';
 
 @Component({
   selector: 'app-ticket-details',

@@ -32,7 +32,6 @@ export class TicketFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.ticketFilterForm.valueChanges.subscribe((value) => {
-      console.log(value);
       this.ticketFilterService.updateTicketFilter(value);
     });
   }

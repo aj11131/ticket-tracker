@@ -1,0 +1,12 @@
+<div style="display: flex;">
+  <button mat-raised-button [matMenuTriggerFor]="menu"><mat-icon>sort</mat-icon> {{sortBy$ | async}}</button>
+  <mat-menu #menu="matMenu">
+    <button *ngFor="let option of SortByEnum | keyvalue" mat-menu-item (click)="onSelectSortBy(option.value)">{{option.value}}</button>
+  </mat-menu>
+  <div *ngIf="sortDirection$ | async as direction">
+    <button mat-raised-button (click)="onToggleDirection(direction)">
+      <mat-icon>{{directionDisplay}}</mat-icon>
+      <!-- <mat-icon *ngIf="direction === SortDirectionEnum.ASCENDING">arrow_upward</mat-icon> -->
+    </button>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <div *ngIf="ticket; else notFound">
   <mat-card>
     <form [formGroup]="ticketForm">
-      <mat-card-subtitle>{{ticket.id}}</mat-card-subtitle>
+      <mat-card-subtitle>{{ticket.ticketId}}</mat-card-subtitle>
       <mat-card-title>
         <mat-form-field style="display: block;" appearance="standard">
           <input matInput placeholder="Title" formControlName="title">
@@ -37,7 +37,7 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button type="button" [routerLink]="'/tickets'">Cancel</button>
-        <button mat-raised-button color="primary">Save</button>
+        <button mat-raised-button color="primary" (click)="onSave()">Save</button>
       </mat-card-actions>
     </form>
   </mat-card>

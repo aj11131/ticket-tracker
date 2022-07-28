@@ -20,8 +20,6 @@ export class TicketComponent implements OnInit {
   ngOnInit(): void {}
 
   onClick() {
-    console.log(`/${this.ticket.id}`);
-    // this.router.navigate([`${this.ticket.id}`]);
     this.router.navigate(['/tickets', this.ticket.id]);
   }
 

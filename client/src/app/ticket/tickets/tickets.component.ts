@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { map, tap, withLatestFrom } from 'rxjs';
+import { Router } from '@angular/router';
+import { combineLatest, map, tap, withLatestFrom } from 'rxjs';
 import { TicketFilterService } from 'src/app/core/ticket-filter.service';
+import { TicketSortService } from 'src/app/core/ticket-sort.service';
 import { TicketService } from 'src/app/core/ticket.service';
 
 @Component({
@@ -12,15 +14,32 @@ export class TicketsComponent implements OnInit {
   tickets$ = this.ticketService.tickets;
 
   ticketFilter$ = this.ticketFilterService.ticketFilter$;
+  ticketSort$ = this.ticketSortService.ticketSort$;
 
-  filteredTickets$ = this.ticketFilter$.pipe(
-    withLatestFrom(this.tickets$),
-    map(this.ticketFilterService.filterTickets)
+  processedTickets$ = combineLatest([
+    this.tickets$,
+    this.ticketFilter$,
+    this.ticketSort$,
+  ]).pipe(
+    map((data) => {
+      const [tickets, filterValue, sortParameters] = data;
+      const filteredTickets = this.ticketFilterService.filterTickets(
+        tickets,
+        filterValue
+      );
+      const sortedTickets = this.ticketSortService.sortTickets(
+        filteredTickets,
+        sortParameters
+      );
+      return sortedTickets;
+    })
   );
 
   constructor(
     private ticketService: TicketService,
-    private ticketFilterService: TicketFilterService
+    private ticketFilterService: TicketFilterService,
+    private ticketSortService: TicketSortService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}

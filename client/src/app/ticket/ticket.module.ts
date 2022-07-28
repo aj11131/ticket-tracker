@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TicketDetailsComponent } from './ticket-details/ticket-details.component';
 import { AuthGuard } from '../core/auth.guard';
+import { TicketSortComponent } from './ticket-sort/ticket-sort.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     TicketComponent,
     TicketFilterComponent,
     TicketDetailsComponent,
+    TicketSortComponent,
   ],
   imports: [
     CommonModule,

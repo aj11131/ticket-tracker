@@ -1,6 +1,13 @@
 
-<mat-card class="filters-card"><app-ticket-filter></app-ticket-filter></mat-card>
+<mat-card class="filters-card">
+  <app-ticket-filter></app-ticket-filter>
+  <br>
+  <div style="display: flex; justify-content: space-between;">
+    <button mat-raised-button color="primary" routerLink="new">&plus; New Ticket</button>
+    <app-ticket-sort></app-ticket-sort>
+  </div>
+</mat-card>
 
-<div *ngFor="let ticket of filteredTickets$ | async">
+<div *ngFor="let ticket of processedTickets$ | async">
   <app-ticket [ticket]="ticket"></app-ticket>
 </div>

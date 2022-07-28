@@ -2,7 +2,7 @@
   <div class="top-row">
     <div class="top-row__id">
       <span style="font-weight: bold;">
-        <h3 class="ticket-card__text ticket-card__text--id">{{ticket.id}}</h3>
+        <h3 class="ticket-card__text ticket-card__text--id">{{ticket.ticketId}}</h3>
       </span>
       <span>
         <p [ngClass]="getStatusClass(ticket.status)" class="top-row__status">{{ticket.status | titlecase}}</p>

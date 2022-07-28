@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of, shareReplay } from 'rxjs';
 import { Ticket } from '@tickets11131/ticket-tracker-common';
 import { tickets } from '../ticket/tickets/test-tickets';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { tick } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +12,7 @@ import { tickets } from '../ticket/tickets/test-tickets';
 export class TicketService {
   private tickets$: Observable<Ticket[]> | null = null;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   get tickets() {
     if (!this.tickets$) {
@@ -20,13 +23,29 @@ export class TicketService {
   }
 
   getTickets(): Observable<Ticket[]> {
-    return of(tickets);
+    const endpoint = environment.apiEndpoint + 'tickets';
+
+    // return of(tickets);
+
+    return this.http.get<Ticket[]>(endpoint);
   }
 
   getTicket(id: string) {
     return this.tickets.pipe(
-      map((tickets) => tickets.find((ticket) => ticket.id === id))
+      map((tickets) => {
+        return tickets.find((ticket) => ticket.id === id);
+      })
     );
+  }
+
+  createTicket(ticket: Ticket) {
+    const endpoint = environment.apiEndpoint + 'tickets';
+    return this.http.post<Ticket>(endpoint, ticket);
+  }
+
+  updateTicket(ticket: Ticket) {
+    const endpoint = environment.apiEndpoint + `tickets/${ticket.id}`;
+    return this.http.put<Ticket>(endpoint, ticket);
   }
 
   forceReload() {

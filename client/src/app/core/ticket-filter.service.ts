@@ -21,8 +21,7 @@ export class TicketFilterService {
 
   constructor() {}
 
-  filterTickets = (data: [TicketFilter | null, Ticket[]]) => {
-    const [filterValue, tickets] = data;
+  filterTickets = (tickets: Ticket[], filterValue: TicketFilter | null) => {
     if (filterValue === null) return tickets;
     let filteredTickets = tickets.filter((ticket) => {
       const valid =
@@ -39,7 +38,7 @@ export class TicketFilterService {
   filterByText = (filterValue: TicketFilter, ticket: Ticket): boolean => {
     const textFilterValue = filterValue.text?.toLowerCase() || '';
     return (
-      ticket.id.toLowerCase().includes(textFilterValue) ||
+      ticket.id?.toLowerCase().includes(textFilterValue) ||
       ticket.title.toLowerCase().includes(textFilterValue) ||
       ticket.description.toLowerCase().includes(textFilterValue)
     );
@@ -64,7 +63,7 @@ export class TicketFilterService {
     const createdAfter = filterValue.createdAfter?.getTime() || -Infinity;
     const createdBefore = filterValue.createdBefore?.getTime() || Infinity;
     if (!createdAfter && !createdBefore) return true;
-    const created = ticket.creationDate.getTime();
+    const created = ticket.creationDate?.getTime() as number;
     return created >= createdAfter && created <= createdBefore;
   };
 

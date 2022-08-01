@@ -10,6 +10,7 @@ import {
   TicketStatusEnum,
   User,
 } from '@tickets11131/ticket-tracker-common';
+import { SnackbarService } from 'src/app/core/snackbar.service';
 
 enum Mode {
   CREATE = 'create',
@@ -35,7 +36,8 @@ export class TicketDetailsComponent implements OnInit {
     private ticketService: TicketService,
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarService
   ) {}
 
   async ngOnInit() {
@@ -90,6 +92,12 @@ export class TicketDetailsComponent implements OnInit {
         })
       )
       .subscribe(() => {
+        if (this.mode === Mode.CREATE) {
+          this.snackbarService.openSnackBarSuccess('Ticket saved!');
+        } else {
+          this.snackbarService.openSnackBarSuccess('Ticket updated!');
+        }
+
         this.router.navigate(['tickets']);
         this.ticketService.forceReload();
       });

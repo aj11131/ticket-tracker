@@ -60,6 +60,8 @@ export class TicketFilterService {
     filterValue: TicketFilter,
     ticket: Ticket
   ): boolean => {
+    console.log(ticket);
+    console.log(filterValue);
     const createdAfter = filterValue.createdAfter?.getTime() || -Infinity;
     const createdBefore = filterValue.createdBefore?.getTime() || Infinity;
     if (!createdAfter && !createdBefore) return true;

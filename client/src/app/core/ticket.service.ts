@@ -27,7 +27,16 @@ export class TicketService {
 
     // return of(tickets);
 
-    return this.http.get<Ticket[]>(endpoint);
+    return this.http
+      .get<Ticket[]>(endpoint)
+      .pipe(
+        map((tickets: Ticket[]) =>
+          tickets.map((ticket) => ({
+            ...ticket,
+            creationDate: new Date(ticket.creationDate),
+          }))
+        )
+      );
   }
 
   getTicket(id: string) {

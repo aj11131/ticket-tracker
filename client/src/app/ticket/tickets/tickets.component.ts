@@ -32,7 +32,8 @@ export class TicketsComponent implements OnInit {
         sortParameters
       );
       return sortedTickets;
-    })
+    }),
+    tap(console.log)
   );
 
   constructor(

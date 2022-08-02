@@ -87,7 +87,7 @@ export class TicketDetailsComponent implements OnInit {
     ticket$
       .pipe(
         take(1),
-        catchError((error) => {
+        catchError(() => {
           return EMPTY;
         })
       )

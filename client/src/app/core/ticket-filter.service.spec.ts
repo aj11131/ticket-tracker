@@ -71,7 +71,7 @@ fdescribe('TicketFilterService', () => {
     expect(valid).toBe(false);
   });
 
-  it('should correctly filter by status', () => {
+  it('should correctly filter by assigned', () => {
     let filterValue = {
       text: '',
       priority: [],
@@ -82,15 +82,15 @@ fdescribe('TicketFilterService', () => {
       createdBefore: null,
     };
 
-    let valid = service.filterByStatus(filterValue, tickets[0]);
+    let valid = service.filterByAssigned(filterValue, tickets[0]);
 
     expect(valid).toBe(true);
 
-    valid = service.filterByStatus(filterValue, tickets[1]);
+    valid = service.filterByAssigned(filterValue, tickets[1]);
 
     expect(valid).toBe(true);
 
-    valid = service.filterByStatus(filterValue, tickets[2]);
+    valid = service.filterByAssigned(filterValue, tickets[2]);
 
     expect(valid).toBe(false);
   });

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { TicketFilterService } from 'src/app/core/ticket-filter.service';
-import {
-  TicketPriorityEnum,
-  TicketStatusEnum,
-} from '@tickets11131/ticket-tracker-common';
+import { TicketPriorityEnum, TicketStatusEnum } from '../../types';
 
 @Component({
   selector: 'app-ticket-filter',

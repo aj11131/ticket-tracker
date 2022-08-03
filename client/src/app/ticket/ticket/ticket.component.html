@@ -22,7 +22,7 @@
   <div class="second-row">
     <div class="second-row__column">
       <p class="ticket-card__text ticket-card__text--light">Assigned To:</p>
-      <p class="ticket-card__text">{{ticket.assigned.name}}</p>
+      <p class="ticket-card__text">{{ticket.assigned.first | titlecase}} {{ticket.assigned.last | titlecase}}</p>
     </div>
     <div class="second-row__column">
       <p class="ticket-card__text ticket-card__text--light">Priority:</p>

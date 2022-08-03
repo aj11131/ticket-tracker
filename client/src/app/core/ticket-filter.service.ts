@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Ticket, TicketStatusEnum } from '@tickets11131/ticket-tracker-common';
+import { Ticket, TicketStatusEnum } from '../types';
 
 export interface TicketFilter {
   text: string;
@@ -60,8 +60,6 @@ export class TicketFilterService {
     filterValue: TicketFilter,
     ticket: Ticket
   ): boolean => {
-    console.log(ticket);
-    console.log(filterValue);
     const createdAfter = filterValue.createdAfter?.getTime() || -Infinity;
     const createdBefore = filterValue.createdBefore?.getTime() || Infinity;
     if (!createdAfter && !createdBefore) return true;

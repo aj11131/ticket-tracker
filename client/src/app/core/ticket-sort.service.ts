@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ticket } from '@tickets11131/ticket-tracker-common';
+import { Ticket } from '../types';
 import { BehaviorSubject, combineLatest, combineLatestWith, tap } from 'rxjs';
 import { SortByEnum, SortDirectionEnum } from '../shared/types';
 

@@ -1,10 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  Ticket,
-  TicketStatusEnum,
-  TicketPriorityEnum,
-} from '@tickets11131/ticket-tracker-common';
+import { Ticket, TicketStatusEnum, TicketPriorityEnum } from '../../types';
 
 @Component({
   selector: 'app-ticket',

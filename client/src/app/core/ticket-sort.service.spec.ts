@@ -1,9 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  Ticket,
-  TicketPriorityEnum,
-  TicketStatusEnum,
-} from '@tickets11131/ticket-tracker-common';
+import { Ticket, TicketPriorityEnum, TicketStatusEnum } from '../types';
 import { SortByEnum, SortDirectionEnum } from '../shared/types';
 
 import { TicketSortService } from './ticket-sort.service';
@@ -74,7 +70,8 @@ const tickets: Ticket[] = [
     assigned: {
       id: '2',
       email: 'test@test.com',
-      name: 'Bob Smith',
+      first: 'Bob',
+      last: 'Smith',
     },
   },
   {
@@ -89,7 +86,8 @@ const tickets: Ticket[] = [
     assigned: {
       id: '2',
       email: 'test@test.com',
-      name: 'Bob Smith',
+      first: 'Brittany',
+      last: 'Stevenson',
     },
   },
   {
@@ -104,7 +102,8 @@ const tickets: Ticket[] = [
     assigned: {
       id: '2',
       email: 'test@test.com',
-      name: 'Bob Smith',
+      first: 'Colin',
+      last: 'Andrews',
     },
   },
 ];

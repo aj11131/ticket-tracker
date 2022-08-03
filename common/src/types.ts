@@ -29,7 +29,7 @@ export interface Ticket {
 }
 
 export interface User {
-  id: string;
+  id?: string;
   email: string;
   first: string;
   last: string;

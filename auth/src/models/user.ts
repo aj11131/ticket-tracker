@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Password } from "../services/password";
 
-interface UserAttrs {
+export interface UserAttrs {
   email: string;
   password: string;
   first: string;

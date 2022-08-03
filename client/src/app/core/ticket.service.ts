@@ -50,7 +50,7 @@ export class TicketService {
   }
 
   updateTicket(ticket: Ticket) {
-    const endpoint = environment.apiEndpoint + `tickets/${ticket.id}`;
+    const endpoint = environment.apiEndpoint + `tickets/${ticket.ticketId}`;
     return this.http.put<Ticket>(endpoint, ticket);
   }
 

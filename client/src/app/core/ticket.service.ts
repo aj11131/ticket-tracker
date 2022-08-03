@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, of, shareReplay } from 'rxjs';
+import { map, Observable, of, shareReplay, tap } from 'rxjs';
 import { Ticket } from '../types';
 import { tickets } from '../ticket/tickets/test-tickets';
 import { environment } from 'src/environments/environment';
@@ -39,7 +39,7 @@ export class TicketService {
   getTicket(id: string) {
     return this.tickets.pipe(
       map((tickets) => {
-        return tickets.find((ticket) => ticket.id === id);
+        return tickets.find((ticket) => ticket.ticketId?.toString() === id);
       })
     );
   }

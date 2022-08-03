@@ -13,7 +13,7 @@
         <h2 class="ticket-card__text--title">{{ticket.title}}</h2>
       </span>
       <span>
-        <p class="ticket-card__text--description">{{ticket.description}}</p>
+        <p class="ticket-card__text--description">{{ (ticket.description.length > 100)? (ticket.description | slice:0:100)+'..':(ticket.description) }}</p>
       </span>
     </div>
   </div>
@@ -27,8 +27,8 @@
     <div class="second-row__column">
       <p class="ticket-card__text ticket-card__text--light">Priority:</p>
       <div class="second-row__priority">
-        <p class="ticket-card__text">{{ticket.priority | titlecase}}</p>
-        <mat-icon style="color: red; transform: scale(.8);" *ngIf="ticket.priority === TicketPriorityEnum.HIGH">priority_high</mat-icon>
+        <p class="ticket-card__text ticket-card__text--priority">{{ticket.priority | titlecase}}</p>
+        <mat-icon class="priority-icon" *ngIf="ticket.priority === TicketPriorityEnum.HIGH">priority_high</mat-icon>
       </div>
     </div>
     <div class="second-row__column">

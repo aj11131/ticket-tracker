@@ -5,7 +5,7 @@ import { Ticket, TicketStatusEnum } from '../types';
 export interface TicketFilter {
   text: string;
   priority: string[] | null;
-  assigned: string | null;
+  assigned: string[] | null;
   status: string[] | null;
   tags: string[] | null;
   createdAfter: Date | null;
@@ -26,6 +26,7 @@ export class TicketFilterService {
     let filteredTickets = tickets.filter((ticket) => {
       const valid =
         this.filterByText(filterValue, ticket) &&
+        this.filterByAssigned(filterValue, ticket) &&
         this.filterByStatus(filterValue, ticket) &&
         this.filterByPriority(filterValue, ticket) &&
         this.filterByCreationDate(filterValue, ticket);
@@ -42,6 +43,12 @@ export class TicketFilterService {
       ticket.title.toLowerCase().includes(textFilterValue) ||
       ticket.description.toLowerCase().includes(textFilterValue)
     );
+  };
+
+  filterByAssigned = (filterValue: TicketFilter, ticket: Ticket): boolean => {
+    const assigned = filterValue.assigned || [];
+    if (assigned?.length === 0) return true;
+    return assigned?.includes(ticket.assigned.id as string) || false;
   };
 
   filterByStatus = (filterValue: TicketFilter, ticket: Ticket): boolean => {

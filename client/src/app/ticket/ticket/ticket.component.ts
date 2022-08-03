@@ -16,7 +16,7 @@ export class TicketComponent implements OnInit {
   ngOnInit(): void {}
 
   onClick() {
-    this.router.navigate(['/tickets', this.ticket.id]);
+    this.router.navigate(['/tickets', this.ticket.ticketId]);
   }
 
   getStatusClass(status: TicketStatusEnum) {

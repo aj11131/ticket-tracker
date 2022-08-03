@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, shareReplay } from 'rxjs';
+import { Observable, of, shareReplay, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../types';
 
@@ -32,36 +32,3 @@ export class UserService {
     this.users$ = null;
   }
 }
-
-const testUsers: User[] = [
-  {
-    id: '891234790812',
-    email: 'test@test.com',
-    first: 'Bob',
-    last: 'Smith',
-  },
-  {
-    id: '67465745674567',
-    email: 'test2@test.com',
-    first: 'Brittany',
-    last: 'Stevenson',
-  },
-  {
-    id: '2',
-    email: 'test3@test.com',
-    first: 'Colin',
-    last: 'Andrews',
-  },
-  {
-    id: '995634545122334',
-    email: 'test4@test.com',
-    first: 'Marcella',
-    last: 'James',
-  },
-  {
-    id: '2445687456846576',
-    email: 'test5@test.com',
-    first: 'Howard',
-    last: 'Mann',
-  },
-];

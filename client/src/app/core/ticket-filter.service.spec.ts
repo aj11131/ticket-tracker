@@ -75,6 +75,30 @@ fdescribe('TicketFilterService', () => {
     let filterValue = {
       text: '',
       priority: [],
+      assigned: ['2', '3'],
+      status: [],
+      tags: null,
+      createdAfter: null,
+      createdBefore: null,
+    };
+
+    let valid = service.filterByStatus(filterValue, tickets[0]);
+
+    expect(valid).toBe(true);
+
+    valid = service.filterByStatus(filterValue, tickets[1]);
+
+    expect(valid).toBe(true);
+
+    valid = service.filterByStatus(filterValue, tickets[2]);
+
+    expect(valid).toBe(false);
+  });
+
+  it('should correctly filter by status', () => {
+    let filterValue = {
+      text: '',
+      priority: [],
       assigned: null,
       status: ['active'],
       tags: null,
@@ -169,7 +193,7 @@ const tickets: Ticket[] = [
     tags: ['server', ''],
     priority: TicketPriorityEnum.MEDIUM,
     assigned: {
-      id: '2',
+      id: '3',
       email: 'test@test.com',
       first: 'Brittany',
       last: 'Stevenson',
@@ -185,7 +209,7 @@ const tickets: Ticket[] = [
     tags: ['server', ''],
     priority: TicketPriorityEnum.HIGH,
     assigned: {
-      id: '2',
+      id: '4',
       email: 'test@test.com',
       first: 'Colin',
       last: 'Andrews',

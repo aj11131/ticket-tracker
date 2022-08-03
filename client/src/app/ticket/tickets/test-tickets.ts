@@ -18,7 +18,7 @@ export const tickets: Ticket[] = [
     tags: ['server', ''],
     priority: TicketPriorityEnum.LOW,
     assigned: {
-      id: '2',
+      id: '891234790812',
       email: 'test@test.com',
       first: 'Bob',
       last: 'Smith',
@@ -34,8 +34,8 @@ export const tickets: Ticket[] = [
     tags: ['server', ''],
     priority: TicketPriorityEnum.MEDIUM,
     assigned: {
-      id: '2',
-      email: 'test@test.com',
+      id: '67465745674567',
+      email: 'test2@test.com',
       first: 'Brittany',
       last: 'Stevenson',
     },

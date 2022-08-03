@@ -7,7 +7,7 @@ import { SortByEnum, SortDirectionEnum } from '../shared/types';
   providedIn: 'root',
 })
 export class TicketSortService {
-  private sortBySubject = new BehaviorSubject<SortByEnum>(SortByEnum.TITLE);
+  private sortBySubject = new BehaviorSubject<SortByEnum>(SortByEnum.CREATED);
   private sortDirectionSubject = new BehaviorSubject<SortDirectionEnum>(
     SortDirectionEnum.ASCENDING
   );

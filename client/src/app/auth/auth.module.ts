@@ -4,9 +4,11 @@ import { MaterialModule } from '../material.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
 
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [AuthComponent, SignupComponent, SigninComponent],
   imports: [
     CommonModule,
     MaterialModule,

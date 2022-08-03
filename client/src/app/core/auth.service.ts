@@ -17,7 +17,12 @@ export class AuthService {
     });
   }
 
-  signup(credentials: { email: string; password: string }) {
+  signup(credentials: {
+    email: string;
+    password: string;
+    first: string;
+    last: string;
+  }) {
     const endpoint = environment.apiEndpoint + 'users/signup';
 
     return this.http.post(endpoint, credentials);

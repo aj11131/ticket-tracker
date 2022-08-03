@@ -1,0 +1,41 @@
+<mat-card class="auth-card">
+  <div class="auth-card__content">
+    <div>
+      <mat-card-title>Sign Up</mat-card-title>
+      <mat-card-subtitle>Already have an account? <a href="javascript:void(0)" [routerLink]="'/signin'">Sign In</a></mat-card-subtitle>
+    </div>
+
+    <mat-card-content>
+      <form [formGroup]="signupForm" (submit)="onSubmit()">
+
+        <mat-form-field style="display: block;" appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field style="display: block;" appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>  
+
+        <mat-form-field style="display: block;" appearance="fill">
+          <mat-label>Enter your first name</mat-label>
+          <input matInput type="text" formControlName="first">
+        </mat-form-field>
+
+        <mat-form-field style="display: block;" appearance="fill">
+          <mat-label>Enter your last name</mat-label>
+          <input matInput type="text" formControlName="last">
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary">Submit</button>
+        <div *ngFor="let error of errors" class="error-card">{{error.message}}</div>
+      </form>
+    </mat-card-content>
+
+    
+  </div>
+</mat-card>

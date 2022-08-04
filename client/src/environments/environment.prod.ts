@@ -1,4 +1,4 @@
 export const environment = {
-  apiEndpoint: `https://ticket-tracker.dev/api/`,
+  apiEndpoint: `http://ticket-tracker.xyz/api/`,
   production: true,
 };

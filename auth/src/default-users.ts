@@ -46,7 +46,7 @@ const users: UserAttrs[] = [
   {
     _id: "62eab5b56b6288743f88026a",
     email: "test@test.com",
-    password: "pass",
+    password: "password1234!",
     first: "Test",
     last: "User",
   },

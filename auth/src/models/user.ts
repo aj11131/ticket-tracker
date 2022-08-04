@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 import { Password } from "../services/password";
 
-interface UserAttrs {
+export interface UserAttrs {
+  _id?: string;
   email: string;
   password: string;
+  first: string;
+  last: string;
 }
 
 const userSchema = new mongoose.Schema<UserAttrs>(
@@ -13,6 +16,14 @@ const userSchema = new mongoose.Schema<UserAttrs>(
       required: true,
     },
     password: {
+      type: String,
+      required: true,
+    },
+    first: {
+      type: String,
+      required: true,
+    },
+    last: {
       type: String,
       required: true,
     },

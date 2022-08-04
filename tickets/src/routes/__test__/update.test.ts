@@ -8,7 +8,7 @@ import {
 } from "@tickets11131/ticket-tracker-common";
 
 it("returns a 404 if the provided id does not exist", async () => {
-  const id = new mongoose.Types.ObjectId().toHexString();
+  const id = 1000;
   await request(app)
     .put(`/api/tickets/${id}`)
     .set("Cookie", global.signin())
@@ -30,7 +30,7 @@ it("returns a 404 if the provided id does not exist", async () => {
 });
 
 it("returns a 401 if the user is not authenticated", async () => {
-  const id = new mongoose.Types.ObjectId().toHexString();
+  const id = 1000;
   await request(app)
     .put(`/api/tickets/${id}`)
     .send({
@@ -52,8 +52,9 @@ it("returns a 401 if the user is not authenticated", async () => {
 
 it("returns a 400 if the user provides an invalid title", async () => {
   const cookie = global.signin();
-  const response = await request(app)
-    .post("/api/tickets")
+  const id = 1000;
+  await request(app)
+    .put(`/api/tickets/${id}`)
     .set("Cookie", cookie)
     .send({
       title: "",
@@ -68,7 +69,8 @@ it("returns a 400 if the user provides an invalid title", async () => {
         email: "test@test.com",
         name: "Bob Smith",
       },
-    });
+    })
+    .expect(400);
 });
 
 it("updates the ticket provided valid inputs", async () => {
@@ -105,7 +107,7 @@ it("updates the ticket provided valid inputs", async () => {
   };
 
   await request(app)
-    .put(`/api/tickets/${response.body.id}`)
+    .put(`/api/tickets/${response.body.ticketId}`)
     .set("Cookie", cookie)
     .send({
       title,
@@ -120,7 +122,7 @@ it("updates the ticket provided valid inputs", async () => {
     .expect(200);
 
   const ticketResponse = await request(app)
-    .get(`/api/tickets/${response.body.id}`)
+    .get(`/api/tickets/${response.body.ticketId}`)
     .send()
     .expect(200);
 

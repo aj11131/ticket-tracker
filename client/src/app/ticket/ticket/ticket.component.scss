@@ -24,6 +24,12 @@
     &--description {
       margin-bottom: 0;
     }
+
+    &--priority {
+      font-weight: bold;
+      margin-right: 0;
+      padding-right: 0;
+    }
   }
 
   &:hover {
@@ -39,6 +45,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px var(--color-grey-medium) solid;
+  padding: 1rem 0 1rem 0;
 
   &__id {
     flex: 1;
@@ -86,5 +93,10 @@
     display: flex;
     align-items: center;
   }
+}
 
+.priority-icon {
+  color: red;
+  transform: scale(.8) translate(-5px);;
+  padding-bottom: 0.25rem;
 }

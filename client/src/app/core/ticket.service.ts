@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, of, shareReplay } from 'rxjs';
-import { Ticket } from '@tickets11131/ticket-tracker-common';
+import { map, Observable, of, shareReplay, tap } from 'rxjs';
+import { Ticket } from '../types';
 import { tickets } from '../ticket/tickets/test-tickets';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { tick } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root',
@@ -27,22 +26,20 @@ export class TicketService {
 
     // return of(tickets);
 
-    return this.http
-      .get<Ticket[]>(endpoint)
-      .pipe(
-        map((tickets: Ticket[]) =>
-          tickets.map((ticket) => ({
-            ...ticket,
-            creationDate: new Date(ticket.creationDate),
-          }))
-        )
-      );
+    return this.http.get<Ticket[]>(endpoint).pipe(
+      map((tickets: Ticket[]) =>
+        tickets.map((ticket) => ({
+          ...ticket,
+          creationDate: new Date(ticket.creationDate),
+        }))
+      )
+    );
   }
 
   getTicket(id: string) {
     return this.tickets.pipe(
       map((tickets) => {
-        return tickets.find((ticket) => ticket.id === id);
+        return tickets.find((ticket) => ticket.ticketId?.toString() === id);
       })
     );
   }
@@ -53,7 +50,7 @@ export class TicketService {
   }
 
   updateTicket(ticket: Ticket) {
-    const endpoint = environment.apiEndpoint + `tickets/${ticket.id}`;
+    const endpoint = environment.apiEndpoint + `tickets/${ticket.ticketId}`;
     return this.http.put<Ticket>(endpoint, ticket);
   }
 

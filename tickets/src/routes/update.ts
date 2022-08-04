@@ -16,7 +16,7 @@ router.put(
   [body("title").not().isEmpty().withMessage("Title is required")],
   validateRequest,
   async (req: Request, res: Response) => {
-    const ticket = await Ticket.findById(req.params.id);
+    const ticket = await Ticket.findOne({ ticketId: req.params.id });
     if (!ticket) throw new NotFoundError();
 
     const {

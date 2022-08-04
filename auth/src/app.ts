@@ -7,7 +7,12 @@ import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
-import { errorHandler, NotFoundError, currentUser } from "@tickets11131/common";
+import {
+  errorHandler,
+  NotFoundError,
+  currentUser,
+} from "@tickets11131/ticket-tracker-common";
+import { getUsersRouter } from "./routes/get-users";
 
 const app = express();
 app.set("trust proxy", true);
@@ -21,6 +26,7 @@ app.use(
 app.use(currentUser);
 
 app.use(currentUserRouter);
+app.use(getUsersRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);

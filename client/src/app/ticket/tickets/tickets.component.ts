@@ -32,15 +32,13 @@ export class TicketsComponent implements OnInit {
         sortParameters
       );
       return sortedTickets;
-    }),
-    tap(console.log)
+    })
   );
 
   constructor(
     private ticketService: TicketService,
     private ticketFilterService: TicketFilterService,
-    private ticketSortService: TicketSortService,
-    private router: Router
+    private ticketSortService: TicketSortService
   ) {}
 
   ngOnInit(): void {}

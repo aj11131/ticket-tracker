@@ -7,7 +7,8 @@ import {
 } from "@tickets11131/ticket-tracker-common";
 import { Counter } from "./counter";
 
-interface ITicket {
+export interface ITicket {
+  _id?: string;
   ticketId: number;
   title: string;
   description: string;

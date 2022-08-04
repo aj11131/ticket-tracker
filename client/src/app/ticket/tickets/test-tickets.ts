@@ -1,8 +1,4 @@
-import {
-  Ticket,
-  TicketPriorityEnum,
-  TicketStatusEnum,
-} from '@tickets11131/ticket-tracker-common';
+import { Ticket, TicketPriorityEnum, TicketStatusEnum } from '../../types';
 
 const date1 = new Date();
 const date2 = new Date();
@@ -22,9 +18,10 @@ export const tickets: Ticket[] = [
     tags: ['server', ''],
     priority: TicketPriorityEnum.LOW,
     assigned: {
-      id: '2',
+      id: '891234790812',
       email: 'test@test.com',
-      name: 'Bob Smith',
+      first: 'Bob',
+      last: 'Smith',
     },
   },
   {
@@ -37,9 +34,10 @@ export const tickets: Ticket[] = [
     tags: ['server', ''],
     priority: TicketPriorityEnum.MEDIUM,
     assigned: {
-      id: '2',
-      email: 'test@test.com',
-      name: 'Bob Smith',
+      id: '67465745674567',
+      email: 'test2@test.com',
+      first: 'Brittany',
+      last: 'Stevenson',
     },
   },
   {
@@ -54,7 +52,8 @@ export const tickets: Ticket[] = [
     assigned: {
       id: '2',
       email: 'test@test.com',
-      name: 'Bob Smith',
+      first: 'Colin',
+      last: 'Andrews',
     },
   },
 ];

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ticket } from '@tickets11131/ticket-tracker-common';
+import { Ticket } from '../types';
 import { BehaviorSubject, combineLatest, combineLatestWith, tap } from 'rxjs';
 import { SortByEnum, SortDirectionEnum } from '../shared/types';
 
@@ -7,7 +7,7 @@ import { SortByEnum, SortDirectionEnum } from '../shared/types';
   providedIn: 'root',
 })
 export class TicketSortService {
-  private sortBySubject = new BehaviorSubject<SortByEnum>(SortByEnum.TITLE);
+  private sortBySubject = new BehaviorSubject<SortByEnum>(SortByEnum.CREATED);
   private sortDirectionSubject = new BehaviorSubject<SortDirectionEnum>(
     SortDirectionEnum.ASCENDING
   );

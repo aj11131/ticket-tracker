@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from '../types';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -17,7 +18,12 @@ export class AuthService {
     });
   }
 
-  signup(credentials: { email: string; password: string }) {
+  signup(credentials: {
+    email: string;
+    password: string;
+    first: string;
+    last: string;
+  }) {
     const endpoint = environment.apiEndpoint + 'users/signup';
 
     return this.http.post(endpoint, credentials);

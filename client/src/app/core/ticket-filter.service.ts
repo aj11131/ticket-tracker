@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Ticket, TicketStatusEnum } from '@tickets11131/ticket-tracker-common';
+import { Ticket, TicketStatusEnum } from '../types';
 
 export interface TicketFilter {
   text: string;
   priority: string[] | null;
-  assigned: string | null;
+  assigned: string[] | null;
   status: string[] | null;
   tags: string[] | null;
   createdAfter: Date | null;
@@ -26,6 +26,7 @@ export class TicketFilterService {
     let filteredTickets = tickets.filter((ticket) => {
       const valid =
         this.filterByText(filterValue, ticket) &&
+        this.filterByAssigned(filterValue, ticket) &&
         this.filterByStatus(filterValue, ticket) &&
         this.filterByPriority(filterValue, ticket) &&
         this.filterByCreationDate(filterValue, ticket);
@@ -44,6 +45,12 @@ export class TicketFilterService {
     );
   };
 
+  filterByAssigned = (filterValue: TicketFilter, ticket: Ticket): boolean => {
+    const assigned = filterValue.assigned || [];
+    if (assigned?.length === 0) return true;
+    return assigned?.includes(ticket.assigned.id as string) || false;
+  };
+
   filterByStatus = (filterValue: TicketFilter, ticket: Ticket): boolean => {
     const selectedStatus = filterValue.status || [];
     if (selectedStatus?.length === 0) return true;
@@ -60,8 +67,6 @@ export class TicketFilterService {
     filterValue: TicketFilter,
     ticket: Ticket
   ): boolean => {
-    console.log(ticket);
-    console.log(filterValue);
     const createdAfter = filterValue.createdAfter?.getTime() || -Infinity;
     const createdBefore = filterValue.createdBefore?.getTime() || Infinity;
     if (!createdAfter && !createdBefore) return true;

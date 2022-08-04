@@ -1,10 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  Ticket,
-  TicketStatusEnum,
-  TicketPriorityEnum,
-} from '@tickets11131/ticket-tracker-common';
+import { Ticket, TicketStatusEnum, TicketPriorityEnum } from '../../types';
 
 @Component({
   selector: 'app-ticket',
@@ -20,7 +16,7 @@ export class TicketComponent implements OnInit {
   ngOnInit(): void {}
 
   onClick() {
-    this.router.navigate(['/tickets', this.ticket.id]);
+    this.router.navigate(['/tickets', this.ticket.ticketId]);
   }
 
   getStatusClass(status: TicketStatusEnum) {

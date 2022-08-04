@@ -7,6 +7,8 @@ it("returns a 201 on successful signup", async () => {
     .send({
       email: "test@test.com",
       password: "password",
+      first: "Test",
+      last: "User",
     })
     .expect(201);
 });
@@ -17,6 +19,8 @@ it("returns a 400 with an invalid email", async () => {
     .send({
       email: "test",
       password: "password",
+      first: "Test",
+      last: "User",
     })
     .expect(400);
 });
@@ -27,6 +31,8 @@ it("returns a 400 with an invalid password", async () => {
     .send({
       email: "test@test.com",
       password: "pas",
+      first: "Test",
+      last: "User",
     })
     .expect(400);
 });
@@ -42,12 +48,34 @@ it("returns a 400 with missing email and password", async () => {
     .expect(400);
 });
 
+it("returns a 400 with missing first or last name", async () => {
+  await request(app)
+    .post("/api/users/signup")
+    .send({
+      email: "test@test.com",
+      password: "password",
+      first: "Test",
+    })
+    .expect(400);
+
+  await request(app)
+    .post("/api/users/signup")
+    .send({
+      email: "test@test.com",
+      password: "password",
+      last: "User",
+    })
+    .expect(400);
+});
+
 it("disallows duplicate emails", async () => {
   await request(app)
     .post("/api/users/signup")
     .send({
       email: "test@test.com",
       password: "password",
+      first: "Test",
+      last: "User",
     })
     .expect(201);
 
@@ -56,6 +84,8 @@ it("disallows duplicate emails", async () => {
     .send({
       email: "test@test.com",
       password: "password",
+      first: "Test",
+      last: "User",
     })
     .expect(400);
 });
@@ -66,6 +96,8 @@ it("sets a cookie after successful signup", async () => {
     .send({
       email: "test@test.com",
       password: "password",
+      first: "Test",
+      last: "User",
     })
     .expect(201);
 

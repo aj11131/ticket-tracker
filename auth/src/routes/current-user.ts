@@ -1,5 +1,5 @@
-import express from 'express';
-import { currentUser } from "@tickets11131/common";
+import express from "express";
+import { currentUser } from "@tickets11131/ticket-tracker-common";
 
 const router = express.Router();
 

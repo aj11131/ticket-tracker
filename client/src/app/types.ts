@@ -1,18 +1,13 @@
-export interface ErrorOutput {
-  message: string;
-  field?: string;
-}
-
 export enum TicketStatusEnum {
-  NEW = "new",
-  ACTIVE = "active",
-  CLOSED = "closed",
+  NEW = 'new',
+  ACTIVE = 'active',
+  CLOSED = 'closed',
 }
 
 export enum TicketPriorityEnum {
-  LOW = "low",
-  MEDIUM = "medium",
-  HIGH = "high",
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
 }
 
 export interface Ticket {

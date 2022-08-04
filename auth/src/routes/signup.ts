@@ -1,7 +1,10 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
-import { BadRequestError, validateRequest } from "@tickets11131/common";
+import {
+  BadRequestError,
+  validateRequest,
+} from "@tickets11131/ticket-tracker-common";
 import { User } from "../models/user";
 
 const router = express.Router();
@@ -14,11 +17,12 @@ router.post(
       .trim()
       .isLength({ min: 4, max: 20 })
       .withMessage("Password must be between 4 and 20 characters"),
+    body("first").trim().notEmpty().withMessage("Please provide a first name"),
+    body("last").trim().notEmpty().withMessage("Please provide a last name"),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-    console.log(email);
+    const { email, password, first, last } = req.body;
 
     const existingUser = await User.findOne({ email });
 
@@ -26,7 +30,7 @@ router.post(
       throw new BadRequestError("Email in use");
     }
 
-    const user = new User({ email, password });
+    const user = new User({ email, password, first, last });
     await user.save();
 
     // Generate JWT

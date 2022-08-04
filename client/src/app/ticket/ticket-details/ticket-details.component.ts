@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, EMPTY, firstValueFrom, Observable, take } from 'rxjs';
+import { catchError, EMPTY, firstValueFrom, Observable, take, tap } from 'rxjs';
 import { TicketService } from 'src/app/core/ticket.service';
 import { UserService } from 'src/app/core/user.service';
 import {
@@ -9,7 +9,7 @@ import {
   TicketPriorityEnum,
   TicketStatusEnum,
   User,
-} from '@tickets11131/ticket-tracker-common';
+} from '../../types';
 import { SnackbarService } from 'src/app/core/snackbar.service';
 
 enum Mode {
@@ -51,7 +51,6 @@ export class TicketDetailsComponent implements OnInit {
       this.mode = Mode.CREATE;
     } else {
       this.ticket = await firstValueFrom(this.ticketService.getTicket(id));
-      console.log(this.ticket);
       this.mode = Mode.UPDATE;
     }
 
@@ -87,7 +86,7 @@ export class TicketDetailsComponent implements OnInit {
     ticket$
       .pipe(
         take(1),
-        catchError((error) => {
+        catchError(() => {
           return EMPTY;
         })
       )

@@ -53,6 +53,8 @@ const users: UserAttrs[] = [
 ];
 
 export const saveDefaultUsers = async () => {
+  await User.deleteMany({});
+
   const userdocs: any = [];
   users.forEach((user) => {
     const { email, password, first, last, _id } = user;

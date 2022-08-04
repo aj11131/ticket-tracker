@@ -86,6 +86,8 @@ const tickets: Partial<ITicket>[] = [
 ];
 
 export const saveDefaultTickets = async () => {
+  await Ticket.deleteMany({});
+
   for await (let ticket of tickets) {
     const {
       title,

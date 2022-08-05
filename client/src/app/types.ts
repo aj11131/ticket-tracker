@@ -16,7 +16,7 @@ export interface Ticket {
   title: string;
   description: string;
   priority: TicketPriorityEnum;
-  assigned: User;
+  assigned: User | null;
   creationDate: Date;
   closedDate: Date | null;
   tags: string[];

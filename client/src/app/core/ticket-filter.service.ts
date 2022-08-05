@@ -48,7 +48,8 @@ export class TicketFilterService {
   filterByAssigned = (filterValue: TicketFilter, ticket: Ticket): boolean => {
     const assigned = filterValue.assigned || [];
     if (assigned?.length === 0) return true;
-    return assigned?.includes(ticket.assigned.id as string) || false;
+    if (!ticket.assigned?.id) return false;
+    return assigned?.includes(ticket.assigned.id) || false;
   };
 
   filterByStatus = (filterValue: TicketFilter, ticket: Ticket): boolean => {

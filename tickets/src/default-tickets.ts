@@ -73,7 +73,7 @@ const tickets: Partial<ITicket>[] = [
     },
   },
   {
-    title: "End User Troubleshooting",
+    title: "Strange Error",
     description: `A notice recently appeared on our site that says: "A fatal error has occured when processing a recent subscription payment with Paypal". It then tells me to open up a support ticket. The last recorded error was "Uncaught error: Call to a member function get_order_number() on boolean". I have created a temporary admin login for the site. The user name is "tempUser". Please someone check this out when you can.`,
     status: TicketStatusEnum.NEW,
     creationDate: new Date("2022-07-22T03:24:00"),

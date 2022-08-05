@@ -5,6 +5,7 @@ This is a full stack Angular and Node.js demo app
 DEMO: https://ticket-tracker.xyz/tickets
 
 Important note: If 'Create demo tickets/notes' checkbox is selected, after successfully signing up you may have to wait minute and then refresh the page as the tickets are created asynchronously
+(A fake email can be used there is no email verification)
 
 ## Features
 

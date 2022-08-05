@@ -22,9 +22,6 @@ export class AccountCreatedListener extends BaseListener {
     const accountId = data.accountId;
     const users = data.users;
 
-    console.log(users);
-    console.log(accountId);
-
     console.log(`account created - ${accountId}`);
 
     await saveDefaultTickets(accountId, users);

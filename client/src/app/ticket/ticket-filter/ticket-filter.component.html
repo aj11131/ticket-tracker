@@ -9,7 +9,7 @@
   <mat-form-field appearance="standard">
     <mat-label>Assigned To</mat-label>
     <mat-select formControlName="assigned" multiple>
-      <mat-option *ngFor="let user of user$ | async" [value]="user.id">{{user.first | titlecase}} {{user.last | titlecase}}</mat-option>
+      <mat-option *ngFor="let user of user$ | async" [value]="user.id">{{user?.first | titlecase}} {{user?.last | titlecase}}</mat-option>
     </mat-select>
   </mat-form-field>
 

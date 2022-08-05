@@ -13,6 +13,10 @@ export class SignupComponent implements OnInit {
   hide = true;
   errors: { message: string }[] = [];
 
+  get demo() {
+    return this.signupForm.controls['demo'].value;
+  }
+
   signupForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],

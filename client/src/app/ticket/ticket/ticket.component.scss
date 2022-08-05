@@ -27,8 +27,8 @@
 
     &--priority {
       font-weight: bold;
-      margin-right: 0;
-      padding-right: 0;
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -87,6 +87,7 @@
 
   &__column {
     display: flex;
+    align-items: center;
   }
 
   &__priority {

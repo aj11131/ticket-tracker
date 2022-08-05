@@ -38,9 +38,9 @@ router.post(
     await user.save();
 
     if (demo === true) {
-      const userIds = await saveDefaultUsers(accountId);
+      const users = await saveDefaultUsers(accountId);
 
-      new AccountCreatedPublisher().publishMessage({ accountId, userIds });
+      new AccountCreatedPublisher().publishMessage({ accountId, users });
     }
 
     // Generate JWT

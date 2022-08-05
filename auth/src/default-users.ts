@@ -53,17 +53,15 @@ export const users: UserAttrs[] = [
 ];
 
 export const saveDefaultUsers = async (accountId: string) => {
-  const usersWithAccountIds = users.map((user) => ({ ...user, accountId }));
-  const userdocs: any = [];
-  const userIds: string[] = [];
-  usersWithAccountIds.forEach((user) => {
+  const usersWithAccountIds = users.map((user) => {
     const userId = new mongoose.Types.ObjectId().toHexString();
+    return { ...user, _id: userId, accountId };
+  });
+  const userdocs: any = [];
+  usersWithAccountIds.forEach((user) => {
     const { email, password, first, last, _id, accountId } = user;
-    userdocs.push(
-      new User({ _id: userId, email, password, first, last, accountId })
-    );
-    userIds.push(userId);
+    userdocs.push(new User({ _id, email, password, first, last, accountId }));
   });
   await User.bulkSave(userdocs);
-  return userIds;
+  return usersWithAccountIds;
 };

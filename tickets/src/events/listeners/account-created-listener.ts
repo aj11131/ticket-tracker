@@ -10,12 +10,23 @@ export class AccountCreatedListener extends BaseListener {
     const body = JSON.parse(message.Body) as { Message: string };
     const data = JSON.parse(body.Message) as {
       accountId: string;
-      userIds: string[];
+      users: {
+        _id: string;
+        accountId: string;
+        email: string;
+        first: string;
+        last: string;
+      }[];
     };
+
     const accountId = data.accountId;
-    const userIds = data.userIds;
+    const users = data.users;
+
+    console.log(users);
+    console.log(accountId);
+
     console.log(`account created - ${accountId}`);
 
-    await saveDefaultTickets(accountId, userIds);
+    await saveDefaultTickets(accountId, users);
   }
 }

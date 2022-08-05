@@ -16,9 +16,9 @@ const tickets: Partial<ITicket>[] = [
     assigned: {
       id: "",
       accountId: "",
-      email: "bobsmith@test.com",
-      first: "Bob",
-      last: "Smith",
+      email: "",
+      first: "",
+      last: "",
     },
   },
   {
@@ -33,9 +33,9 @@ const tickets: Partial<ITicket>[] = [
     assigned: {
       id: "",
       accountId: "",
-      email: "bobsmith@test.com",
-      first: "Bob",
-      last: "Smith",
+      email: "",
+      first: "",
+      last: "",
     },
   },
   {
@@ -50,9 +50,9 @@ const tickets: Partial<ITicket>[] = [
     assigned: {
       id: "",
       accountId: "",
-      email: "brittanystevenson@test.com",
-      first: "Brittany",
-      last: "Stevenson",
+      email: "",
+      first: "",
+      last: "",
     },
   },
   {
@@ -67,9 +67,9 @@ const tickets: Partial<ITicket>[] = [
     assigned: {
       id: "",
       accountId: "",
-      email: "colinandrews@test.com",
-      first: "Colin",
-      last: "Andrews",
+      email: "",
+      first: "",
+      last: "",
     },
   },
   {
@@ -83,23 +83,29 @@ const tickets: Partial<ITicket>[] = [
     assigned: {
       id: "",
       accountId: "",
-      email: "marcellajames@test.com",
-      first: "Marcella",
-      last: "James",
+      email: "",
+      first: "",
+      last: "",
     },
   },
 ];
 
 export const saveDefaultTickets = async (
   accountId: string,
-  userIds: string[]
+  users: {
+    _id: string;
+    accountId: string;
+    email: string;
+    first: string;
+    last: string;
+  }[]
 ) => {
   const ticketsWithAccountId = tickets.map((ticket) => {
-    const userId = userIds[Math.floor(Math.random() * userIds.length)];
+    const user = users[Math.floor(Math.random() * users.length)];
     return {
       ...ticket,
       accountId,
-      assigned: { ...ticket.assigned, accountId, id: userId },
+      assigned: { ...user, id: user._id },
     };
   });
 

@@ -10,6 +10,7 @@
 
         <section style="margin-bottom: 1rem;">
           <mat-checkbox formControlName="demo">Create demo tickets/users</mat-checkbox>
+          <p *ngIf="demo">It may take a minute or two for the demo tickets to be created. Refresh the page if they are not showing... New tickets can be created in the meantime.</p>
         </section>
         
         <mat-form-field style="display: block;" appearance="fill">

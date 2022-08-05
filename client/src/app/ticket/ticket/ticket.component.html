@@ -27,8 +27,7 @@
     <div class="second-row__column">
       <p class="ticket-card__text ticket-card__text--light">Priority:</p>
       <div class="second-row__priority">
-        <p class="ticket-card__text ticket-card__text--priority">{{ticket.priority | titlecase}}</p>
-        <mat-icon class="priority-icon" *ngIf="ticket.priority === TicketPriorityEnum.HIGH">priority_high</mat-icon>
+        <p class="ticket-card__text ticket-card__text--priority">{{ticket.priority | titlecase}}<mat-icon class="priority-icon" *ngIf="ticket.priority === TicketPriorityEnum.HIGH">priority_high</mat-icon></p>
       </div>
     </div>
     <div class="second-row__column">

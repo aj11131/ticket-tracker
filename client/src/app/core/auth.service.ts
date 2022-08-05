@@ -23,6 +23,7 @@ export class AuthService {
     password: string;
     first: string;
     last: string;
+    demo: boolean;
   }) {
     const endpoint = environment.apiEndpoint + 'users/signup';
 

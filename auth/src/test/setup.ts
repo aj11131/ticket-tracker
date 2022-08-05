@@ -2,6 +2,7 @@ import request from "supertest";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import { app } from "../app";
+import { saveDefaultUsers } from "../default-users";
 
 declare global {
   var signin: () => Promise<string[]>;
@@ -10,6 +11,10 @@ declare global {
 let mongo: any;
 
 jest.mock("../events/publishers/account-created-publisher.ts");
+
+jest.mock("../default-users", () => ({
+  saveDefaultUsers: jest.fn().mockImplementation(() => {}),
+}));
 
 beforeAll(async () => {
   process.env.JWT_KEY = "asdfasdf";
@@ -36,6 +41,7 @@ global.signin = async () => {
   const password = "password";
   const first = "Test";
   const last = "User";
+  const demo = false;
 
   const response = await request(app)
     .post("/api/users/signup")
@@ -44,6 +50,7 @@ global.signin = async () => {
       password,
       first,
       last,
+      demo,
     })
     .expect(201);
 

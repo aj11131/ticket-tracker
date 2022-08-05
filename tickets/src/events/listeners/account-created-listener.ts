@@ -8,9 +8,14 @@ export class AccountCreatedListener extends BaseListener {
   async handleMessage(message: AWS.SQS.Message) {
     if (!message.Body) return;
     const body = JSON.parse(message.Body) as { Message: string };
-    const data = JSON.parse(body.Message) as { accountId: string };
+    const data = JSON.parse(body.Message) as {
+      accountId: string;
+      userIds: string[];
+    };
     const accountId = data.accountId;
+    const userIds = data.userIds;
+    console.log(`account created - ${accountId}`);
 
-    await saveDefaultTickets(accountId);
+    await saveDefaultTickets(accountId, userIds);
   }
 }

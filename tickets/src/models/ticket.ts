@@ -63,7 +63,7 @@ const ticketSchema = new mongoose.Schema<ITicket>(
 
 ticketSchema.pre("save", async function () {
   if (!this.ticketId) {
-    let counter = await Counter.findById("ticketId");
+    let counter = await Counter.findById(`ticketId-${this.accountId}`);
     if (!counter) {
       counter = new Counter({
         _id: `ticketId-${this.accountId}`,

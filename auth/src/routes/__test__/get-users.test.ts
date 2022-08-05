@@ -1,7 +1,5 @@
 import request from "supertest";
 import { app } from "../../app";
-import { users } from "../../default-users";
-import { AccountCreatedPublisher } from "../../events/publishers/account-created-publisher";
 
 jest.mock("../../events/publishers/account-created-publisher");
 
@@ -18,5 +16,7 @@ it("returns users if authenticated", async () => {
     .send()
     .expect(200);
 
-  expect(response.body.length).toBe(users.length + 1);
+  console.log(response.body);
+
+  expect(response.body.length).toBe(1);
 });

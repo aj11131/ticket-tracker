@@ -3,6 +3,7 @@ import { BasePublisher } from "@tickets11131/ticket-tracker-common";
 
 export class AccountCreatedPublisher extends BasePublisher<{
   accountId: string;
+  userIds: string[];
 }> {
   topicArn = "arn:aws:sns:us-east-1:405944478746:account-created.fifo";
 

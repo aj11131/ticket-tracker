@@ -1,5 +1,6 @@
 import request from "supertest";
 import { app } from "../../app";
+import { saveDefaultUsers } from "../../default-users";
 
 it("returns a 201 on successful signup", async () => {
   return request(app)
@@ -102,4 +103,20 @@ it("sets a cookie after successful signup", async () => {
     .expect(201);
 
   expect(response.get("Set-Cookie")).toBeDefined();
+});
+
+it("creates demo users and publishes event if demo mode is selected", async () => {
+  const response = await request(app)
+    .post("/api/users/signup")
+    .send({
+      email: "test@test.com",
+      password: "password",
+      first: "Test",
+      last: "User",
+      demo: true,
+    })
+    .expect(201);
+
+  expect(response.get("Set-Cookie")).toBeDefined();
+  expect(saveDefaultUsers).toBeCalledTimes(1);
 });

@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit {
     password: ['', Validators.required],
     first: ['', Validators.required],
     last: ['', Validators.required],
+    demo: [false],
   });
 
   constructor(
@@ -34,6 +35,7 @@ export class SignupComponent implements OnInit {
       password: string;
       first: string;
       last: string;
+      demo: boolean;
     };
 
     this.authService
@@ -41,15 +43,22 @@ export class SignupComponent implements OnInit {
       .pipe(
         take(1),
         catchError(
-          (error: { errors: { message: string; field: string }[] }) => {
+          (error: {
+            error: { errors: { message: string; field: string }[] };
+          }) => {
             this.errors = [];
-
-            if (!error || !error.errors) {
+            console.log(error);
+            if (
+              !error ||
+              !error.error ||
+              !error.error.errors ||
+              error.error.errors.length === 0
+            ) {
               this.addError({ message: 'Unable to signin' });
               return EMPTY;
             }
 
-            error.errors.forEach((error, i) => {
+            error.error.errors.forEach((error, i) => {
               this.errors.push({ ...error });
             });
 

@@ -25,7 +25,7 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password, first, last } = req.body;
+    const { email, password, first, last, demo } = req.body;
     const accountId = new mongoose.Types.ObjectId().toHexString();
 
     const existingUser = await User.findOne({ email });
@@ -37,9 +37,11 @@ router.post(
     const user = new User({ email, accountId, password, first, last });
     await user.save();
 
-    await saveDefaultUsers(accountId);
+    if (demo === true) {
+      const userIds = await saveDefaultUsers(accountId);
 
-    new AccountCreatedPublisher().publishMessage({ accountId });
+      new AccountCreatedPublisher().publishMessage({ accountId, userIds });
+    }
 
     // Generate JWT
     const userJwt = jwt.sign(

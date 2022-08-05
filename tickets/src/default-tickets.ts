@@ -14,7 +14,7 @@ const tickets: Partial<ITicket>[] = [
     tags: ["server", ""],
     priority: TicketPriorityEnum.LOW,
     assigned: {
-      id: "62eab54baf2f7b7384cddbc1",
+      id: "",
       accountId: "",
       email: "bobsmith@test.com",
       first: "Bob",
@@ -31,7 +31,7 @@ const tickets: Partial<ITicket>[] = [
     tags: ["server", ""],
     priority: TicketPriorityEnum.MEDIUM,
     assigned: {
-      id: "62eab54baf2f7b7384cddbc1",
+      id: "",
       accountId: "",
       email: "bobsmith@test.com",
       first: "Bob",
@@ -48,7 +48,7 @@ const tickets: Partial<ITicket>[] = [
     tags: ["server", ""],
     priority: TicketPriorityEnum.HIGH,
     assigned: {
-      id: "62eab5a1a9d6cf01c437bf5d",
+      id: "",
       accountId: "",
       email: "brittanystevenson@test.com",
       first: "Brittany",
@@ -65,7 +65,7 @@ const tickets: Partial<ITicket>[] = [
     tags: ["server", ""],
     priority: TicketPriorityEnum.LOW,
     assigned: {
-      id: "62eab5a6de0a61d848c00068",
+      id: "",
       accountId: "",
       email: "colinandrews@test.com",
       first: "Colin",
@@ -81,7 +81,7 @@ const tickets: Partial<ITicket>[] = [
     tags: ["server", ""],
     priority: TicketPriorityEnum.LOW,
     assigned: {
-      id: "62eab5aa8ca60be52aeb68b4",
+      id: "",
       accountId: "",
       email: "marcellajames@test.com",
       first: "Marcella",
@@ -90,12 +90,18 @@ const tickets: Partial<ITicket>[] = [
   },
 ];
 
-export const saveDefaultTickets = async (accountId: string) => {
-  const ticketsWithAccountId = tickets.map((ticket) => ({
-    ...ticket,
-    accountId,
-    assigned: { ...ticket.assigned, accountId },
-  }));
+export const saveDefaultTickets = async (
+  accountId: string,
+  userIds: string[]
+) => {
+  const ticketsWithAccountId = tickets.map((ticket) => {
+    const userId = userIds[Math.floor(Math.random() * userIds.length)];
+    return {
+      ...ticket,
+      accountId,
+      assigned: { ...ticket.assigned, accountId, id: userId },
+    };
+  });
 
   for await (let ticket of ticketsWithAccountId) {
     const {
@@ -118,6 +124,7 @@ export const saveDefaultTickets = async (accountId: string) => {
       tags,
       priority,
       assigned,
+      accountId,
     });
 
     await ticketDoc.save();

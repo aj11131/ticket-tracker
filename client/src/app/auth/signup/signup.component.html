@@ -8,13 +8,17 @@
     <mat-card-content>
       <form [formGroup]="signupForm" (submit)="onSubmit()">
 
+        <section style="margin-bottom: 1rem;">
+          <mat-checkbox formControlName="demo">Create demo tickets/users</mat-checkbox>
+        </section>
+        
         <mat-form-field style="display: block;" appearance="fill">
           <mat-label>Enter your email</mat-label>
           <input matInput type="email" formControlName="email">
         </mat-form-field>
 
         <mat-form-field style="display: block;" appearance="fill">
-          <mat-label>Enter your password</mat-label>
+          <mat-label>Create password</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

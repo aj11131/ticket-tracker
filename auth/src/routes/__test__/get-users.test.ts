@@ -16,7 +16,5 @@ it("returns users if authenticated", async () => {
     .send()
     .expect(200);
 
-  console.log(response.body);
-
   expect(response.body.length).toBe(1);
 });

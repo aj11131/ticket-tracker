@@ -3,6 +3,7 @@ import { Password } from "../services/password";
 
 export interface UserAttrs {
   _id?: string;
+  accountId: string;
   email: string;
   password: string;
   first: string;
@@ -11,6 +12,10 @@ export interface UserAttrs {
 
 const userSchema = new mongoose.Schema<UserAttrs>(
   {
+    accountId: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,

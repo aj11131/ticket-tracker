@@ -5,6 +5,7 @@ import {
   TicketPriorityEnum,
   User,
 } from "@tickets11131/ticket-tracker-common";
+import { accountId } from "../../test/setup";
 
 const createTicket = () => {
   return request(app)
@@ -12,6 +13,7 @@ const createTicket = () => {
     .set("Cookie", global.signin())
     .send({
       id: "1234",
+      accountId: accountId,
       title: "Low priority ticket",
       description: "I am a ticket",
       status: TicketStatusEnum.NEW,
@@ -33,7 +35,11 @@ it("can fetch a list of tickets", async () => {
   await createTicket();
   await createTicket();
 
-  const response = await request(app).get(`/api/tickets`).send().expect(200);
+  const response = await request(app)
+    .get(`/api/tickets`)
+    .set("Cookie", global.signin())
+    .send()
+    .expect(200);
 
   expect(response.body.length).toEqual(3);
 });

@@ -18,6 +18,7 @@ export enum TicketPriorityEnum {
 export interface Ticket {
   id?: string;
   ticketId?: number;
+  accountId: string;
   title: string;
   description: string;
   priority: TicketPriorityEnum;
@@ -30,6 +31,7 @@ export interface Ticket {
 
 export interface User {
   id?: string;
+  accountId: string;
   email: string;
   first: string;
   last: string;

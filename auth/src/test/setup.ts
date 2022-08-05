@@ -9,6 +9,8 @@ declare global {
 
 let mongo: any;
 
+jest.mock("../events/publishers/account-created-publisher.ts");
+
 beforeAll(async () => {
   process.env.JWT_KEY = "asdfasdf";
 

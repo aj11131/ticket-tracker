@@ -10,6 +10,7 @@ import { Counter } from "./counter";
 export interface ITicket {
   _id?: string;
   ticketId: number;
+  accountId: string;
   title: string;
   description: string;
   status: TicketStatusEnum;
@@ -24,6 +25,10 @@ const ticketSchema = new mongoose.Schema<ITicket>(
   {
     ticketId: {
       type: Number,
+    },
+    accountId: {
+      type: String,
+      required: true,
     },
     title: {
       type: String,
@@ -61,7 +66,7 @@ ticketSchema.pre("save", async function () {
     let counter = await Counter.findById("ticketId");
     if (!counter) {
       counter = new Counter({
-        _id: "ticketId",
+        _id: `ticketId-${this.accountId}`,
         seq: 1000,
       });
 

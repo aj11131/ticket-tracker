@@ -4,11 +4,15 @@ import mongoose from "mongoose";
 import { app } from "../app";
 import jwt from "jsonwebtoken";
 
+jest.mock("../events/listeners/account-created-listener.ts");
+
 declare global {
   var signin: () => string[];
 }
 
 let mongo: any;
+
+export const accountId = new mongoose.Types.ObjectId().toHexString();
 
 beforeAll(async () => {
   process.env.JWT_KEY = "asdfasdf";
@@ -36,6 +40,7 @@ global.signin = () => {
   const payload = {
     id: new mongoose.Types.ObjectId().toHexString(),
     email: "test@test.com",
+    accountId: accountId,
   };
   // Create the JWT
   const token = jwt.sign(payload, process.env.JWT_KEY!);

@@ -6,6 +6,9 @@ import {
   validateRequest,
 } from "@tickets11131/ticket-tracker-common";
 import { User } from "../models/user";
+import mongoose from "mongoose";
+import { saveDefaultUsers } from "../default-users";
+import { AccountCreatedPublisher } from "../events/publishers/account-created-publisher";
 
 const router = express.Router();
 
@@ -23,6 +26,7 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) => {
     const { email, password, first, last } = req.body;
+    const accountId = new mongoose.Types.ObjectId().toHexString();
 
     const existingUser = await User.findOne({ email });
 
@@ -30,13 +34,18 @@ router.post(
       throw new BadRequestError("Email in use");
     }
 
-    const user = new User({ email, password, first, last });
+    const user = new User({ email, accountId, password, first, last });
     await user.save();
+
+    await saveDefaultUsers(accountId);
+
+    new AccountCreatedPublisher().publishMessage({ accountId });
 
     // Generate JWT
     const userJwt = jwt.sign(
       {
         id: user.id,
+        accountId,
         email: user.email,
       },
       process.env.JWT_KEY!

@@ -15,6 +15,7 @@ const tickets: Partial<ITicket>[] = [
     priority: TicketPriorityEnum.LOW,
     assigned: {
       id: "62eab54baf2f7b7384cddbc1",
+      accountId: "",
       email: "bobsmith@test.com",
       first: "Bob",
       last: "Smith",
@@ -31,6 +32,7 @@ const tickets: Partial<ITicket>[] = [
     priority: TicketPriorityEnum.MEDIUM,
     assigned: {
       id: "62eab54baf2f7b7384cddbc1",
+      accountId: "",
       email: "bobsmith@test.com",
       first: "Bob",
       last: "Smith",
@@ -47,6 +49,7 @@ const tickets: Partial<ITicket>[] = [
     priority: TicketPriorityEnum.HIGH,
     assigned: {
       id: "62eab5a1a9d6cf01c437bf5d",
+      accountId: "",
       email: "brittanystevenson@test.com",
       first: "Brittany",
       last: "Stevenson",
@@ -63,6 +66,7 @@ const tickets: Partial<ITicket>[] = [
     priority: TicketPriorityEnum.LOW,
     assigned: {
       id: "62eab5a6de0a61d848c00068",
+      accountId: "",
       email: "colinandrews@test.com",
       first: "Colin",
       last: "Andrews",
@@ -78,6 +82,7 @@ const tickets: Partial<ITicket>[] = [
     priority: TicketPriorityEnum.LOW,
     assigned: {
       id: "62eab5aa8ca60be52aeb68b4",
+      accountId: "",
       email: "marcellajames@test.com",
       first: "Marcella",
       last: "James",
@@ -85,10 +90,14 @@ const tickets: Partial<ITicket>[] = [
   },
 ];
 
-export const saveDefaultTickets = async () => {
-  await Ticket.deleteMany({});
+export const saveDefaultTickets = async (accountId: string) => {
+  const ticketsWithAccountId = tickets.map((ticket) => ({
+    ...ticket,
+    accountId,
+    assigned: { ...ticket.assigned, accountId },
+  }));
 
-  for await (let ticket of tickets) {
+  for await (let ticket of ticketsWithAccountId) {
     const {
       title,
       description,

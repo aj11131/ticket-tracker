@@ -1,6 +1,10 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { requireAuth, validateRequest } from "@tickets11131/common";
+import {
+  BadRequestError,
+  requireAuth,
+  validateRequest,
+} from "@tickets11131/ticket-tracker-common";
 import { Ticket } from "../models/ticket";
 
 const router = express.Router();
@@ -11,6 +15,12 @@ router.post(
   [body("title").not().isEmpty().withMessage("Title is required")],
   validateRequest,
   async (req: Request, res: Response) => {
+    const accountId = req.currentUser?.accountId as string;
+
+    if (!accountId) {
+      throw new BadRequestError("No account ID provided");
+    }
+
     const {
       title,
       description,
@@ -31,6 +41,7 @@ router.post(
       tags,
       priority,
       assigned,
+      accountId,
     });
 
     await ticket.save();

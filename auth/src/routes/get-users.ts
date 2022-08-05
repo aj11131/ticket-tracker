@@ -1,11 +1,22 @@
 import express from "express";
-import { currentUser } from "@tickets11131/ticket-tracker-common";
+import {
+  BadRequestError,
+  currentUser,
+  requireAuth,
+} from "@tickets11131/ticket-tracker-common";
 import { User } from "../models/user";
 
 const router = express.Router();
 
-router.get("/api/users", currentUser, async (req, res) => {
-  const users = await User.find({});
+router.get("/api/users", requireAuth, async (req, res) => {
+  const accountId = req.currentUser?.accountId as string;
+
+  if (!accountId) {
+    throw new BadRequestError("No account ID provided");
+  }
+
+  const users = await User.find({ accountId: accountId });
+
   res.send(users);
 });
 

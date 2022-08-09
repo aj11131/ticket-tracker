@@ -32,7 +32,7 @@ export class TicketDetailsComponent implements OnInit {
   users$ = this.userService.users;
 
   get invalid() {
-    return this.ticketForm.valid;
+    return !this.ticketForm.valid;
   }
 
   constructor(

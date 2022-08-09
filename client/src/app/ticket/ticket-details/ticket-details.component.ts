@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, EMPTY, firstValueFrom, Observable, take, tap } from 'rxjs';
 import { TicketService } from 'src/app/core/ticket.service';
@@ -31,6 +31,10 @@ export class TicketDetailsComponent implements OnInit {
 
   users$ = this.userService.users;
 
+  get invalid() {
+    return this.ticketForm.valid;
+  }
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private ticketService: TicketService,
@@ -57,7 +61,7 @@ export class TicketDetailsComponent implements OnInit {
     this.ticketForm = this.fb.group({
       id: [this.ticket?.id],
       ticketId: [this.ticket?.ticketId],
-      title: [this.ticket?.title],
+      title: [this.ticket?.title, Validators.required],
       description: [this.ticket?.description],
       priority: [this.ticket?.priority],
       status: [this.ticket?.status],

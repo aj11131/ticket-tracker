@@ -1,7 +1,6 @@
 import "express-async-errors";
 import mongoose from "mongoose";
 import { app } from "./app";
-import { saveDefaultTickets } from "./default-tickets";
 import { AccountCreatedListener } from "./events/listeners/account-created-listener";
 
 const start = async () => {
